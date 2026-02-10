@@ -27,7 +27,7 @@
         
 
         // float whatsappp
-        loadSection('/components/float-whatsapp.html', 'whatsapp-placeholder');
+        loadSection('components/float-whatsapp.html', 'whatsapp-placeholder');
 
         // Put this at the very bottom of index.html
 function runUttamSearch() {
@@ -106,4 +106,5 @@ document.addEventListener('click', function(e) {
             });
     }
 });
+
     
