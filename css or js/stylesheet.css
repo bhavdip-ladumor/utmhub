@@ -3,7 +3,7 @@
             --resin-color: #00cec9; --wood-color: #e17055; --acrylic-color: #a29bfe;
             --whatsapp: #25D366; --white: #ffffff;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        /* * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; }
         /* This adds space above the section when you click a nav button */
         #art-placeholder, 
@@ -15,4 +15,5 @@
 }
 
         @media (max-width: 480px) { .direction-nav { grid-template-columns: 1fr 1fr; gap: 10px; } .dir-btn { font-size: 0.75rem; } }
-   
+
+    */
