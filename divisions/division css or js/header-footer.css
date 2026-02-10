@@ -16,22 +16,21 @@
     height: 12vh;
     min-height: 80px;
     background: #ffffff;
+    /* FLEXBOX SETUP */
     display: flex;
     align-items: center;
-    justify-content: center; /* This keeps brand-center dead center */
+    justify-content: center; /* Forces the ONLY center-flow element (brand-center) to the middle */
     position: relative;
     border-bottom: 1px solid #f0f0f0;
     overflow: hidden; 
 }
 
-/* 1. POSITION HUB ICON ON THE LEFT */
 .back-link {
-    position: absolute; /* Takes it out of the flow so it doesn't push the title */
+    position: absolute; /* Removes it from space calculation */
     left: 20px;
+    top: 50%;
+    transform: translateY(-50%); /* Perfectly vertical centers the button */
     z-index: 20; 
-    background: rgba(255,255,255,0.7);
-    padding: 5px 10px;
-    border-radius: 10px;
     text-decoration: none;
     color: var(--text);
     font-size: 0.8rem;
@@ -39,17 +38,19 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    pointer-events: auto; /* Ensures it is clickable */
+    pointer-events: auto;
 }
 
-/* 2. KEEP TITLE AND SUBTITLE IN CENTER */
 .brand-center {
+    /* No absolute positioning here so it stays in the flex flow */
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 10;
-    pointer-events: none; /* Let clicks pass through to the canvas if needed */
+    pointer-events: none;
+    /* Ensure it doesn't get squished by absolute elements */
+    width: auto; 
 }
 
 .main-title {
@@ -135,3 +136,4 @@
     color: #999;
 
 }
+
