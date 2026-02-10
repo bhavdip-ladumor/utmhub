@@ -16,20 +16,20 @@
     height: 12vh;
     min-height: 80px;
     background: #ffffff;
-    /* FLEXBOX SETUP */
     display: flex;
     align-items: center;
-    justify-content: center; /* Forces the ONLY center-flow element (brand-center) to the middle */
-    position: relative;
+    justify-content: center; /* Forces flex children to center */
+    position: relative;      /* Required for absolute positioning of the link */
     border-bottom: 1px solid #f0f0f0;
     overflow: hidden; 
 }
 
 .back-link {
-    position: absolute; /* Removes it from space calculation */
+    position: absolute; 
     left: 20px;
+    /* Use top/transform to ensure it doesn't affect the width of the header */
     top: 50%;
-    transform: translateY(-50%); /* Perfectly vertical centers the button */
+    transform: translateY(-50%);
     z-index: 20; 
     text-decoration: none;
     color: var(--text);
@@ -38,21 +38,18 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    pointer-events: auto;
 }
 
 .brand-center {
-    /* No absolute positioning here so it stays in the flex flow */
-    text-align: center;
+    /* This will now be the only 'visible' item for the Flexbox math */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     z-index: 10;
     pointer-events: none;
-    /* Ensure it doesn't get squished by absolute elements */
-    width: auto; 
 }
-
 .main-title {
     font-size: 1.6rem;
     font-weight: 900;
@@ -136,4 +133,5 @@
     color: #999;
 
 }
+
 
