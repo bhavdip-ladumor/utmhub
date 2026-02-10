@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Jovial Bees</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; }
+        .wrapper { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .icon-box { font-size: 4rem; color: #fdcb6e; margin-bottom: 20px; }
+        h1 { color: #2d3436; margin-bottom: 10px; }
+        p { color: #636e72; max-width: 500px; margin-bottom: 35px; }
+
+        .button-group { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .btn { padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 12px; transition: 0.3s; }
+        
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-support { background: #0984e3; color: white; }
+        
+        /* The "Step Back" Link Style */
+        .btn-back { 
+            margin-top: 50px; 
+            color: #2d3436; 
+            text-decoration: underline; 
+            font-weight: 600; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-back:hover { color: #e84393; }
+        icon-box {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 10px 15px rgba(253, 203, 110, 0.3)); /* Adds a soft glow */
+}
+
+.icon-box i {
+    animation: bounce-slow 3s infinite ease-in-out;
+}
+
+@keyframes bounce-slow {
+    0%, 100% { transform: translateY(5) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(10deg); } /* Bounces and tilts slightly */
+}
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="icon-box"><i class="fas fa-tools"></i></div>
+        <h1>Coming Soon!</h1>
+        <p>This section is currently under development. Get in touch with us directly for early access or inquiries!</p>
+
+        <div class="button-group">
+            <a href="https://wa.me/919724362981?text=Hi! I was looking at a category that is coming soon. Please notify me." target="_blank" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Notify Me
+            </a>
+            <a href="https://wa.me/919724362981?text=I need help with Jovial Bees services." target="_blank" class="btn btn-support">
+                <i class="fas fa-headset"></i> Support
+            </a>
+        </div>
+
+        <a href="javascript:void(0);" onclick="goBack()" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Go Back to Previous Category
+        </a>
+    </div>
+
+    <script>
+
+        function loadSection(file, elementId) {
+    fetch(file)
+        .then(response => response.text())
+        .then(data => { 
+            document.getElementById(elementId).innerHTML = data; 
+            
+            // NEW: If we just loaded the hero, attach the search event!
+            if(elementId === 'hero-placeholder') {
+                const searchInput = document.getElementById('uttamSearch');
+                if(searchInput) {
+                    searchInput.addEventListener('input', runUttamSearch);
+                }
+            }
+        })
+        .catch(err => console.log("Missing file: " + file));
+}
+    function goBack() {
+        // If there is a previous page in our site, go back one step
+        if (document.referrer.indexOf(window.location.host) !== -1) {
+            window.history.back();
+        } else {
+            // Default to home if no history exists
+            window.location.href = "index.html";
+        }
+    }
+
+    </script>
+</body>
+</html>
