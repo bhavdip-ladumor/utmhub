@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results | Uttam Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { 
+            --primary: #2d3436; 
+            --accent: #0984e3; 
+            --bg: #f4f7f6; 
+            --text-gray: #636e72;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            display: flex; 
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container { 
+            width: 100%;
+            max-width: 800px; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            align-self: flex-start; 
+            margin-top: 40px;
+        }
+
+        .back-link { 
+            display: inline-block; 
+            margin-bottom: 25px; 
+            text-decoration: none; 
+            color: var(--accent); 
+            font-weight: bold; 
+            cursor: pointer;
+            transition: transform 0.2s;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            padding: 0;
+        }
+        .back-link:hover { transform: translateX(-5px); }
+
+        h1 { 
+            font-size: 1.8rem; 
+            color: var(--primary); 
+            border-bottom: 2px solid #eee; 
+            padding-bottom: 15px; 
+            margin-top: 0;
+        }
+
+        .result-item { 
+            border-bottom: 1px solid #eee; 
+            padding: 20px 0; 
+            transition: 0.3s; 
+        }
+        .result-item:last-child { border-bottom: none; }
+        .result-item:hover { padding-left: 10px; background: #fafafa; }
+        
+        .result-item a { 
+            color: var(--accent); 
+            font-size: 1.3rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            display: block; 
+            margin-bottom: 5px;
+        }
+        .result-item p { color: var(--text-gray); margin: 5px 0; font-size: 0.95rem; }
+        
+        .category-tag { 
+            font-size: 0.7rem; 
+            background: #dfe6e9; 
+            padding: 4px 10px; 
+            border-radius: 4px; 
+            text-transform: uppercase; 
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .no-results { text-align: center; padding: 50px; }
+        .no-results i { font-size: 4rem; color: #fab1a0; margin-bottom: 20px; }
+        
+        .whatsapp-btn { 
+            background: #25D366; 
+            color: white; 
+            padding: 12px 25px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            display: inline-block; 
+            margin-top: 20px; 
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .whatsapp-btn:hover { background: #1eb954; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button onclick="goBack()" class="back-link"><i class="fas fa-arrow-left"></i> Back to Previous Page</button>
+        
+        <h1>Results for: <span id="search-query" style="color: var(--accent);"></span></h1>
+        
+        <div id="results-list"></div>
+    </div>
+
+    <script src="data.js"></script>
+
+    <script>
+        // 1. Back Function Logic
+        function goBack() {
+            if (document.referrer !== "" && window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = "index.html"; // Fallback to home
+            }
+        }
+
+        // 2. Search Logic
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get('query') ? params.get('query').toLowerCase().trim() : "";
+        document.getElementById('search-query').innerText = query || "Nothing";
+
+        const resultsContainer = document.getElementById('results-list');
+        
+        // Use 'masterDatabase' from your data.js file
+        // If data.js fails to load, we use the local database as a backup
+        const searchSource = (typeof masterDatabase !== 'undefined') ? masterDatabase : [
+            { title: "Resin Cosmos", link: "resin.html", tags: "resin art gifts ocean preservation epoxy clock", desc: "Customized resin art and preservation gifts." },
+            { title: "Wooden Beyond", link: "wooden.html", tags: "mdf cutting wood job work laser cnc furniture nameplate", desc: "Expert MDF cutting and laser job work." },
+            { title: "Resin & Wood Hybrid", link: "resin.html", tags: "resin wood table furniture mix", desc: "Premium fusion of epoxy resin and natural wood." },
+            { title: "Acrylic Fortune", link: "acrylic.html", tags: "acrylic signs display led transparent plexiglass", desc: "Premium acrylic nameplates and display solutions." },
+            { title: "Vinyl Stickers", link: "stickers.html", tags: "stickers labels logo laptop waterproof metallic radium", desc: "Customized stickers and vinyl branding." },
+            { title: "3D Printing", link: "3d-printing.html", tags: "3d print stl lithophane prototype figure workshop", desc: "3D printing services and custom lithophanes." },
+            { title: "Injection Molding", link: "manufacturing.html", tags: "plastic factory caps switches solid manufacturing", desc: "Industrial solid plastic manufacturing." },
+            { title: "Blow Molding", link: "manufacturing.html", tags: "bottles cans hollow containers detergent oil", desc: "Hollow plastic container manufacturing." },
+            { title: "Disposable Store", link: "trading.html", tags: "paper plates glass cutlery packaging wholesale", desc: "Bulk disposable catering and packaging supplies." }
+        ];
+
+        if (!query) {
+            resultsContainer.innerHTML = "<div class='no-results'><p>Please enter a search term.</p></div>";
+        } else {
+            const filteredResults = searchSource.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.tags.toLowerCase().includes(query)
+            );
+
+            if (filteredResults.length > 0) {
+                filteredResults.forEach(item => {
+                    resultsContainer.innerHTML += `
+                        <div class="result-item">
+                            <a href="${item.link}">${item.title}</a>
+                            <p>${item.desc}</p>
+                            <span class="category-tag"><i class="fas fa-tag"></i> ${item.link.replace('.html', '')}</span>
+                        </div>`;
+                });
+            } else {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>No products found for "<strong>${query}</strong>".</p>
+                        <p>Have a custom requirement? Chat with us directly:</p>
+                        <a href="https://wa.me/919724362981?text=Inquiry%20for%20${query}" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> Inquiry on WhatsApp
+                        </a>
+                    </div>`;
+            }
+        }
+    </script>
+</body>
+</html>
