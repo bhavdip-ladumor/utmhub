@@ -62,7 +62,7 @@ document.addEventListener('click', function(e) {
     // 2. If the link is just "#", send to coming-soon
     if (path === "#") {
         e.preventDefault();
-        window.location.href = 'coming-soon.html';
+        window.location.href = '../components/coming-soon.html';
         return;
     }
 
@@ -96,7 +96,7 @@ document.addEventListener('click', function(e) {
                 if (response.ok) {
                     window.location.href = href; // File exists, go there
                 } else {
-                    window.location.href = 'coming-soon.html'; // 404, go to coming soon
+                    window.location.href = '../components/coming-soon.html'; // 404, go to coming soon
                 }
             })
             .catch(() => {
@@ -108,3 +108,4 @@ document.addEventListener('click', function(e) {
 });
 
     
+
