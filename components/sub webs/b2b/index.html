@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B2B Portal | Jovial Bees</title>
+    
+    <link rel="stylesheet" href="main-style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    
+
+
+     <div id="header-fence"></div>
+     <div id="b2b-fence"></div>
+     <div id="footer-fence"></div>
+    
+
+    
+
+
+    <script>
+        /**
+ * Loads an external HTML file into a specific container
+ * @param {string} file - Path to the html file (e.g., 'b2b.html')
+ * @param {string} elementId - The ID of the div to inject into
+ */
+function loadSection(file, elementId) {
+    fetch(file)
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById(elementId).innerHTML = data;
+        })
+        .catch(error => console.error('Error loading section:', error));
+}
+
+// Execute the load
+window.onload = () => {
+    loadSection('b2b.html', 'b2b-fence');
+    loadSection('footer.html', 'footer-fence');
+    loadSection('header.html', 'header-fence');
+};
+    </script>
+</body>
+</html>

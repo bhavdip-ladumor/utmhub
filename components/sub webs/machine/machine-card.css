@@ -1,0 +1,131 @@
+/* --- Container & Layout --- */
+.machine-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* --- Base Card Styles --- */
+.machine-card {
+    display: flex;
+    flex-direction: column; /* Stacked for Mobile */
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.machine-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* --- Image Section --- */
+.card-image {
+    flex: 1;
+    min-height: 250px;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.machine-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+/* --- Content Section --- */
+.card-content {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.service-tag {
+    display: inline-block;
+    background: #fff9e6; /* Jovial Bee Yellow Tint */
+    color: #d4a017;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    width: fit-content;
+}
+
+.machine-name {
+    font-size: 1.8rem;
+    color: #0056b3;
+    margin: 0 0 15px 0;
+}
+
+.machine-desc {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.read-more {
+    font-weight: bold;
+    color: #0056b3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s ease;
+}
+
+.machine-card:hover .read-more {
+    gap: 15px; /* Arrow moves out slightly on hover */
+}
+
+/* --- RESPONSIVE VIEWS --- */
+
+/* Tablet & Desktop (Horizontal View) */
+@media (min-width: 768px) {
+    .machine-card {
+        flex-direction: row;
+        height: 350px;
+    }
+
+    /* Every card with .flipped class shows image on the right */
+    .machine-card.flipped {
+        flex-direction: row-reverse;
+    }
+    
+    .card-content {
+        padding: 50px;
+    }
+}
+
+/* TV View (Large Screens) */
+@media (min-width: 1921px) {
+    .machine-container { max-width: 1800px; gap: 80px; }
+    .machine-card { height: 500px; border-radius: 40px; }
+    .machine-name { font-size: 3rem; }
+    .machine-desc { font-size: 1.8rem; }
+    .service-tag { font-size: 1.2rem; padding: 10px 20px; }
+}
+
+/* Mobile Tweak */
+@media (max-width: 480px) {
+    .card-image { min-height: 200px; }
+    .machine-name { font-size: 1.5rem; }
+    .card-content { padding: 20px; }
+}

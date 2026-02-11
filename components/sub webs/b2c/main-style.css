@@ -1,0 +1,11 @@
+:root {
+    --bee-yellow: #ffd700;
+    --accent: #6c5ce7;
+    --text: #1a1a1a;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fdfdfd;
+}

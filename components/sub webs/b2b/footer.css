@@ -1,0 +1,18 @@
+.main-footer {
+    background: #111;
+    color: white;
+    padding: 40px 20px;
+    margin-top: 60px;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.footer-brand h3 span { color: #ffd700; }
+.footer-info p { color: #888; font-size: 0.9rem; margin-top: 5px; }

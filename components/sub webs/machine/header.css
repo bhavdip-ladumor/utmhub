@@ -1,0 +1,196 @@
+/* header.css */
+
+.simple-header {
+    width: 100%;
+    /* Reduced height to pull content up */
+    min-height: auto; 
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Aligns content toward the top */
+    position: relative;
+    overflow: hidden;
+    /* Reduced top padding to remove extra space */
+    padding: 20px 20px 00px 20px; 
+}
+
+#headerCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.3; /* Subtle background physics */
+}
+
+.header-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+    /* This ensures the brand is near the top */
+    margin-top: 20px; 
+}
+
+/* BRAND TYPOGRAPHY */
+.main-title {
+    font-size: clamp(2.5rem, 8vw, 6rem); 
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: var(--text);
+    line-height: 1;
+}
+
+.main-title span { 
+    color: var(--bee-yellow); 
+}
+
+.sub-title {
+    font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+    letter-spacing: 5px;
+    color: #bbb;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+/* PRECISION BOX */
+.precision-box {
+    margin-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 30px;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(108, 92, 231, 0.08);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.precision-title {
+    font-size: clamp(1.1rem, 2.5vw, 2.2rem);
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.precision-text {
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+    color: #555;
+    max-width: 750px; /* Slightly wider to accommodate the new text */
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Make the strong tags (Job Work, Sales, etc.) stand out in your brand purple */
+.precision-text strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+/* TV & LARGE MONITOR TWEAK */
+@media (min-width: 2000px) {
+    .simple-header { min-height: auto; }
+}/* header.css */
+
+.simple-header {
+    width: 100%;
+    /* Reduced height to pull content up */
+    min-height: auto; 
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Aligns content toward the top */
+    position: relative;
+    overflow: hidden;
+    /* Reduced top padding to remove extra space */
+    padding: 20px 20px 20px 20px; 
+}
+
+#headerCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.3; /* Subtle background physics */
+}
+
+.header-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+    /* This ensures the brand is near the top */
+    margin-top: 20px; 
+}
+
+/* BRAND TYPOGRAPHY */
+.main-title {
+    font-size: clamp(2.5rem, 8vw, 6rem); 
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: var(--text);
+    line-height: 1;
+}
+
+.main-title span { 
+    color: var(--bee-yellow); 
+}
+
+.sub-title {
+    font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+    letter-spacing: 5px;
+    color: #bbb;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+/* PRECISION BOX */
+.precision-box {
+    margin-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 30px;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(108, 92, 231, 0.08);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.precision-title {
+    font-size: clamp(1.1rem, 2.5vw, 2.2rem);
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.precision-text {
+    font-size: clamp(0.85rem, 1.1vw, 1.2rem);
+    color: #777;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* TV & LARGE MONITOR TWEAK */
+@media (min-width: 2000px) {
+    .simple-header { min-height: 40vh; }
+}

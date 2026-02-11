@@ -1,0 +1,16 @@
+:root {
+    --accent: #6c5ce7;
+    --bee-yellow: #f1c40f;
+    --text: #1a1a1a;
+    --light-bg: #f9f9fb;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--light-bg);
+}
+
