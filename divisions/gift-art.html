@@ -7,6 +7,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <link rel="stylesheet" href="division css or js/common-divisions-service-card.css">
     <link rel="stylesheet" href="division css or js/header-footer.css">
+    <link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../shopcart.css">
+
 </head>
 <body>
 
@@ -28,6 +31,40 @@
     <div id="gift-art-service-placeholder"></div>
   
     <div id="whatsapp-placeholder"></div>
+
+    <!-- cart------ -->
+<div class="cart-icon-fixed" onclick="toggleCart()">
+    <span class="icon">🛒</span>
+    <span id="cart-count" class="badge">0</span>
+</div>
+
+<div id="cart-sidebar" class="cart-sidebar">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button class="close-sidebar" onclick="toggleCart()" >x</button>
+    </div>
+    
+    <div id="cart-items-container"></div>
+
+    <div class="cart-footer">
+        <div class="total-row">
+            <span>Total:</span>
+            <span>₹<span id="cart-total-amount">0</span></span>
+        </div>
+        <button class="btn-whatsapp" onclick="checkoutWhatsApp()">Checkout</button>
+        <button class="btn-clear-all" onclick="clearCart()">Clear Cart</button>
+    </div>
+</div>
+<!-- cart------- -->
+
+
+
+
+<div id="cart-overlay" onclick="toggleCart()"></div>
+
+
+
+    <script src="../../script.js"></script>
 
 <footer class="simple-footer">
         <div class="footer-wrap">
@@ -52,7 +89,7 @@
 
 
    
-    <script src="../css or js/cart.js"></script>
+   
     
     <script>
         function loadSection(file, elementId) {
@@ -77,6 +114,7 @@
 </body>
 
 </html>
+
 
 
 
