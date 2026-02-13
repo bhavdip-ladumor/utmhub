@@ -63,7 +63,7 @@ async function loadProducts() {
     // stote cache file for fast work
     const CACHE_KEY = 'UTTAM_HUB_PRODUCTS';
     const CACHE_TIME_KEY = 'UTTAM_HUB_TIMESTAMP';
-    const EXPIRE_TIME = 10 * 60 * 1000; // 10 minutes (Adjust as needed)
+    const EXPIRE_TIME = 20 * 1000; // 20 second (Adjust as needed)
 
 
     try {
@@ -550,4 +550,5 @@ document.addEventListener('DOMContentLoaded', () => {
         loadProducts();
     }
 });
+
 
