@@ -56,8 +56,34 @@ function mapRowToProduct(cols) {
 // container and card and sections are from below
 
 // --- 3. DATA LOADING ---
+// --- 3. DATA LOADING ---
 async function loadProducts() {
+
+
+    // stote cache file for fast work
+    const CACHE_KEY = 'UTTAM_HUB_PRODUCTS';
+    const CACHE_TIME_KEY = 'UTTAM_HUB_TIMESTAMP';
+    const EXPIRE_TIME = 10 * 60 * 1000; // 10 minutes (Adjust as needed)
+
+
     try {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
+        const now = Date.now();
+
+        // 1. Check if we have valid cache
+        if (cachedData && cachedTime && (now - cachedTime < EXPIRE_TIME)) {
+            console.log("⚡ Loading from Cache (Instant)");
+            allProducts = JSON.parse(cachedData);
+            
+            // Trigger initial view
+            const allBtn = document.querySelector('.cat-btn'); 
+            filterView('all', allBtn);
+            return; // Stop here, no need to fetch from internet
+        }
+
+        // 2. If no cache or expired, fetch from Google Sheets
+        console.log("🌐 Fetching fresh data from Google Sheets...")
         const response = await fetch(CSV_URL);
         const data = await response.text();
         // Split by lines and remove empty ones
@@ -74,6 +100,10 @@ async function loadProducts() {
             }
         });
 
+        // 3. Save the new data to Cache
+        localStorage.setItem(CACHE_KEY, JSON.stringify(allProducts));
+        localStorage.setItem(CACHE_TIME_KEY, now.toString());
+
         // Step B: Now that data is ready, trigger the initial "All" view
         const allBtn = document.querySelector('.cat-btn'); 
         filterView('all', allBtn);
@@ -82,6 +112,7 @@ async function loadProducts() {
         console.error("Error loading CSV:", error);
     }
 }
+
 
 //let selectedAttrs = {}; // Stores user selection for the popup
 
@@ -519,3 +550,4 @@ document.addEventListener('DOMContentLoaded', () => {
         loadProducts();
     }
 });
+
