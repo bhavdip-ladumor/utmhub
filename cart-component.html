@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart - Uttam Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="shopcart.css">
+</head>
+<body>
+
+    <nav class="category-nav">
+        <a href="index.html" class="cat-btn">← Back to Shop</a>
+    </nav>
+
+  <!-- cart------ -->
+<div class="cart-icon-fixed" onclick="toggleCart()">
+    <span class="icon">🛒</span>
+    <span id="cart-count" class="badge">0</span>
+</div>
+
+<div id="cart-sidebar" class="cart-sidebar">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button class="close-sidebar" onclick="toggleCart()" >x</button>
+    </div>
+    
+    <div id="cart-items-container"></div>
+
+    <div class="cart-footer">
+        <div class="total-row">
+            <span>Total:</span>
+            <span>₹<span id="cart-total-amount">0</span></span>
+        </div>
+        <button class="btn-whatsapp" onclick="checkoutWhatsApp()">Order on WhatsApp</button>
+        <button class="btn-clear-all" onclick="clearCart()">Clear Cart</button>
+    </div>
+</div>
+<!-- cart------- -->
+
+    <script src="script.js"></script>
+</body>
+</html>
