@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install Uttam Hub</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .app-card {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            max-width: 350px;
+            width: 90%;
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 { margin: 10px 0; font-size: 24px; }
+        p { color: #94a3b8; margin-bottom: 30px; }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            text-decoration: none;
+        }
+
+        .btn:active { transform: scale(0.98); }
+
+        .android { background: #3ddc84; color: #072112; }
+        .ios { background: #ffffff; color: #000000; }
+        .windows { background: #00a4ef; color: white; }
+
+        #ios-guide {
+            display: none;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-card">
+        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjavvD1mIWTFNuH83zz4vQQ0tHbfXbrU7C9qk6Fs-1fokthQ9avOlrC66iwmV1knStOYWGwiHYceXIsLT-7cg5zieozm_Z_2Za5GHNzSw7kN-pNmMakQYq7gYwi5ePwUeQwYjL7M-cn5oM7xNJ5BPtDXxGOzk5D1LzVRgO4gkils1VxCoBB8Ul9kNvGjY-f" alt="Uttam Hub" class="app-icon">
+        
+        <h1>Uttam Hub</h1>
+        <p>Choose your device to install</p>
+
+        <button class="btn android" id="btnAndroid">
+            <i class="fab fa-android"></i> Install for Android
+        </button>
+
+        <button class="btn windows" id="btnWindows">
+            <i class="fab fa-windows"></i> Install for Windows
+        </button>
+
+        <button class="btn ios" id="btnIOS">
+            <i class="fab fa-apple"></i> Install for iPhone
+        </button>
+
+        <div id="ios-guide">
+            1. Tap the <strong>Share</strong> button <i class="fa-regular fa-square-plus"></i> (bottom of screen).<br>
+            2. Scroll down and tap <strong>'Add to Home Screen'</strong>.
+        </div>
+    </div>
+
+    <script>
+        let deferredPrompt;
+
+        // Capture the install event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        // Android & Windows Logic (Both use Chrome/Edge engine)
+        const handleInstall = async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+            } else {
+                alert("Installation ready! If you don't see a popup, please open this link in Google Chrome or Microsoft Edge.");
+            }
+        };
+
+        document.getElementById('btnAndroid').addEventListener('click', handleInstall);
+        document.getElementById('btnWindows').addEventListener('click', handleInstall);
+
+        // iOS Logic (Apple does not allow code-based prompts)
+        document.getElementById('btnIOS').addEventListener('click', () => {
+            document.getElementById('ios-guide').style.display = 'block';
+            document.getElementById('btnIOS').style.backgroundColor = '#e2e8f0';
+        });
+
+        // Register Service Worker (Crucial for GitHub Pages)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
