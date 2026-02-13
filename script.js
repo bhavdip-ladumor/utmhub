@@ -474,5 +474,48 @@ function checkoutWhatsApp() {
 
 
 
+// cart div genaret everywhere
+// with using place this into html file <div id="cart-placeholder"></div> 
+//where you want cart
+async function injectGlobalCart() {
+    const placeholder = document.getElementById('cart-placeholder');
+    if (!placeholder) return;
 
-document.addEventListener('DOMContentLoaded', loadProducts);
+    // 1. Get the current depth of the file
+    // index.html = 0 or 1
+    // /divisions/gift art.html = 2
+    // /divisions/css/rate.html = 3
+    const pathSegments = window.location.pathname.split('/').filter(p => p).length;
+    
+    let prefix = "";
+    if (pathSegments > 1) {
+        // Adds "../" for every level deeper than root
+        prefix = "../".repeat(pathSegments - 1);
+    }
+
+    try {
+        // Fetch the component from the root using the prefix
+        const response = await fetch(prefix + 'cart-component.html');
+        const html = await response.text();
+        placeholder.innerHTML = html;
+        
+        // Sync the cart data immediately
+        renderCartUI(); 
+    } catch (err) {
+        console.error("Cart injection failed. Check if cart-component.html is in root.", err);
+    }
+}
+
+
+
+
+// Modify your existing DOMContentLoaded listener:
+document.addEventListener('DOMContentLoaded', () => {
+    // This loads the HTML AND then calls renderCartUI() automatically
+    injectGlobalCart();
+
+    // Load products only if a grid exists on the page
+    if (document.getElementById('product-grid')) {
+        loadProducts();
+    }
+});
