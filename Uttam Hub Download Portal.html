@@ -134,5 +134,12 @@
             navigator.serviceWorker.register('sw.js');
         }
     </script>
+    <script>
+  // If the app is already running in "standalone" mode (installed), 
+  // send the user to the main index page automatically.
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+      window.location.href = "index.html";
+  }
+</script>
 </body>
 </html>
