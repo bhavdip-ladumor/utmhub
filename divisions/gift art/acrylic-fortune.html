@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acrylic Fortune | Luxury Acrylic Designs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="../../../shopcart.css">
     <style>
         :root { --primary: #0a3d62; --accent: #3c6382; --whatsapp: #25D366; --bg: #f4f7f6; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -178,7 +180,16 @@
             window.open(`https://wa.me/919724362981?text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
-    <script src="../../css or js/cart.js"></script>
+
+    
+    <div id="cart-placeholder"></div>
+
+    <div id="cart-overlay" onclick="toggleCart()"></div>
+
+    <script src="../../../script.js"></script>
+    
+    
 </body>
 
 </html>
+
