@@ -1,87 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uttam Hub | Manufacturing & Custom Gifts</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css or js/card-style.css">
-    <link rel="stylesheet" href="css or js/stylesheet.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="shopcart.css">
-    <link rel="stylesheet" href="slider.css">
-    <link rel="manifest" href="manifest.json">
-
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
-   
-</head>
-<body>
-
-    <div id="header-placeholder"></div>
-
-    <div class="hero-viewport">
-    <div class="split-slider" id="split-slider">
-        </div>
-    
-    <div class="indicator-container" id="indicator-container"></div>
-</div>
-
-    <div id="hero-placeholder"></div>
-
-    <div id="hiring-placeholder"></div>
-
-    <div id="nav-placeholder"></div>
-
-    <div id="about-placeholder"></div>
-
-    <div id="footer-placeholder"></div>
-   
-    <div id="whatsapp-placeholder"></div>
-
-    <div id="cart-placeholder"></div>
-    
-<div id="cart-overlay" onclick="toggleCart()"></div>
-     
-     
-
-    <script>
-        // EASILY CUSTOMIZABLE DATA
 const heroData = [
-    { title: "ARCHITECTURAL FLOW", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1500" },
-    { title: "NATURE BEYOND", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1500" },
-    { title: "DUSK HORIZON", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500" },
-    { title: "resin.cosmos", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500" }
-
+    { title: "ONE STOP SOLUTION", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1500" },
+    { title: "INDUSTRIAL EXCELLENCE", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1500" },
+    { title: "CREATIVE ARTISTRY", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500" }
 ];
 
 const slider = document.getElementById('split-slider');
-const dots = document.getElementById('indicator-container');
+const dotsContainer = document.getElementById('indicator-container');
 let currentIdx = 0;
+let autoPlayTimer; // Variable to hold the timer
 
 function setup() {
+    if(!slider) return;
+
     heroData.forEach((item, i) => {
         // Build Slide
         const s = document.createElement('div');
         s.className = `slide ${i === 0 ? 'active' : ''}`;
-        s.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${item.img})`;
+        s.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('${item.img}')`;
         s.innerHTML = `<div class="slide-content"><h1>${item.title}</h1></div>`;
         slider.appendChild(s);
 
         // Build Dot
         const d = document.createElement('div');
         d.className = `dot ${i === 0 ? 'active' : ''}`;
-        d.onclick = () => goTo(i);
-        dots.appendChild(d);
+        d.onclick = () => {
+            goTo(i);
+            resetTimer(); // Reset timer on click
+        };
+        dotsContainer.appendChild(d);
     });
+
+    startTimer(); // Start the 3-second cycle
 }
 
 function goTo(index) {
-    if (index === currentIdx) return;
-    
     const allSlides = document.querySelectorAll('.slide');
     const allDots = document.querySelectorAll('.dot');
 
@@ -89,39 +41,37 @@ function goTo(index) {
     allSlides[currentIdx].classList.remove('active');
     allDots[currentIdx].classList.remove('active');
 
-    // Add active to new
+    // Update index
     currentIdx = index;
+    if (currentIdx >= heroData.length) currentIdx = 0;
+    if (currentIdx < 0) currentIdx = heroData.length - 1;
+
+    // Add active to new
     allSlides[currentIdx].classList.add('active');
     allDots[currentIdx].classList.add('active');
 }
 
-// TOUCH SWIPE FOR MOBILE
+// --- TIMER LOGIC ---
+function startTimer() {
+    autoPlayTimer = setInterval(() => {
+        goTo(currentIdx + 1);
+    }, 3000); // 3000ms = 3 seconds
+}
+
+function resetTimer() {
+    clearInterval(autoPlayTimer);
+    startTimer();
+}
+
+// --- SWIPE LOGIC ---
 let xStart = 0;
 slider.addEventListener('touchstart', e => xStart = e.touches[0].clientX);
 slider.addEventListener('touchend', e => {
     let xDiff = xStart - e.changedTouches[0].clientX;
     if (Math.abs(xDiff) > 50) {
-        let n = xDiff > 0 ? currentIdx + 1 : currentIdx - 1;
-        if (n >= heroData.length) n = 0;
-        if (n < 0) n = heroData.length - 1;
-        goTo(n);
+        goTo(xDiff > 0 ? currentIdx + 1 : currentIdx - 1);
+        resetTimer();
     }
 });
 
 setup();
-    </script>
-    <script src="slider.js"></script>
-
-
-    <script src="css or js/the.js"></script>
-    <script src="css or js/cart.js"></script>
-</body>
-
-</html> 
-
-
-
-
-
-
-
