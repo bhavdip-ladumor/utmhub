@@ -1,0 +1,83 @@
+:root {
+    --ratio: 3 / 1;
+    --transition-speed: 0.9s;
+}
+
+@media (max-width: 768px) { :root { --ratio: 16 / 9; } }
+
+.hero-viewport {
+    width: 100%;
+    max-width: 1400px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.split-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--ratio);
+    overflow: hidden;
+    background: #000;
+    border-radius: 10px;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* The magic: by default, slides are clipped out (hidden) */
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path var(--transition-speed) cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1;
+}
+
+/* The active slide reveals itself from the center */
+.slide.active {
+    clip-path: circle(100% at 50% 50%);
+    z-index: 2;
+}
+
+.slide-content {
+    color: white;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+    transition-delay: 0.3s;
+}
+
+.slide.active .slide-content {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* MODERN DOT INDICATORS */
+.indicator-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+/* The "Running" effect: dot expands and glows */
+.dot.active {
+    background: #fff;
+    box-shadow: 0 0 10px #fff;
+    transform: scale(1.8);
+}
