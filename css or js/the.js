@@ -7,7 +7,7 @@
 
         // LOAD EVERYTHING IN ORDER
         // HeRO SLIDER   
-        loadSection('../slider.html', 'slider-placeholder');
+        loadSection('../../slider.html', 'slider-placeholder');
 
         // 1. Core Layout
         loadSection('components/header.html', 'header-placeholder');
@@ -110,6 +110,7 @@ document.addEventListener('click', function(e) {
 });
 
     
+
 
 
 
