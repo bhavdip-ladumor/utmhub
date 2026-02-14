@@ -1,6 +1,6 @@
 // EASILY CUSTOMIZABLE DATA
 const heroData = [
-    { title: "ARCHITECTURAL FLOW", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1500" },
+    { title: "ARCHITECTURAL FLOW", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhR39kOBIH7p5o62i2Pk1RECNj90QjTqKJ6aR5-jtes49Y-oJbArM8m7gYHv6M6P9HQ6rdWDs7VUhZ5FKzTbSIT08aKbEZsAnpiZRCTMu2btVh8OSNqO97ZOFsIv1JLhNsRSGuKbYre2lAu4NkDVbAhJ2272dAmXFJ0WhWQ3JGdtS4plD77Dg40mYDl/w486-h486/2021-02-09.png" },
     { title: "NATURE BEYOND", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1500" },
     { title: "DUSK HORIZON", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500" },
     { title: "resin.cosmos", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500" }
@@ -56,5 +56,6 @@ slider.addEventListener('touchend', e => {
         goTo(n);
     }
 });
+
 
 setup();
