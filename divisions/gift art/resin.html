@@ -22,10 +22,56 @@
         }
         .insta-link { color: #fd79a8; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
 
+
+        #preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0f172a; /* Matches a dark theme */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Stays above everything */
+    transition: opacity 0.5s ease;
+}
+
+.loader-content {
+    text-align: center;
+    color: #ffffff;
+    font-family: sans-serif;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #3b82f6; /* Modern blue accent */
+    animation: spin 1s ease-in-out infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Class to hide the loader */
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
        </style>
 </head>
 <body>
-
+<div id="preloader">
+    <div class="loader-content">
+        <div class="spinner"></div>
+        <p>Uttam Hub</p>
+    </div>
+</div>
     
 
   <header>
@@ -103,11 +149,18 @@
     <div id="cart-overlay" onclick="toggleCart()"></div>
 
     <script src="../../../script.js"></script>
-
+   <script>window.addEventListener("load", function () {
+    const loader = document.getElementById("preloader");
+    // Small delay for a smoother transition
+    setTimeout(() => {
+        loader.classList.add("loader-hidden");
+    }, 500); 
+});</script>
     
 </body>
 
 </html>
+
 
 
 
