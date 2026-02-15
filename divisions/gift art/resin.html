@@ -24,6 +24,32 @@
 
 
 
+                .loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    width: 100%;
+    color: #64748b; /* Subtle gray */
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(59, 130, 246, 0.1);
+    border-top: 3px solid #3b82f6; /* Matching your blue accent */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+        
+
        </style>
 </head>
 <body>
@@ -56,7 +82,11 @@
 
 
 <!-- product grid -->
-<section class="shop-section">
+<section class="shop-section" style="position: relative; min-height: 300px;">
+      <div id="shop-loader" class="loader-container">
+        <div class="spinner"></div>
+        <p>Loading Products...</p>
+    </div>
     <div id="product-grid" class="product-grid">
         </div>
 </section>
@@ -105,11 +135,27 @@
     <div id="cart-overlay" onclick="toggleCart()"></div>
 
     <script src="../../../script.js"></script>
+
+
+    <script>// Call this function AFTER your products are added to the #product-grid
+function showProducts() {
+    const loader = document.getElementById('shop-loader');
+    const grid = document.getElementById('product-grid');
+    
+    if (loader && grid) {
+        loader.style.display = 'none'; // Remove the loader
+        grid.style.opacity = '1';      // Fade in the products
+    }
+}
+
+// If you are using window.onload, it looks like this:
+window.addEventListener('load', showProducts);</script>
   
     
 </body>
 
 </html>
+
 
 
 
